@@ -1,10 +1,14 @@
+from dotenv import load_dotenv
 from flask import Flask
-from views.task_controller import task_controller
+from flask_restful import Api
+from services.audio_service import AudioUpload
+
+load_dotenv()
 
 app = Flask(__name__)
+api = Api(app)
 
-app.register_blueprint(task_controller)
+api.add_resource(AudioUpload, '/upload')
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
